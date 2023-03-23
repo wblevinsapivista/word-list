@@ -15,6 +15,7 @@ export const mapResponse = (response: any): StockSearchResponse => {
       timezone: match["7. timezone"],
       currency: match["8. currency"],
       matchScore: match["9. matchScore"],
+      isFavorite: false,
     };
     mappedResponse.stocks.push(stockItem);
   }
