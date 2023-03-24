@@ -3,15 +3,33 @@ import {
   alpha,
   AppBar,
   Box,
+  createStyles,
   IconButton,
   InputBase,
   styled,
+  TextField,
   Toolbar,
   Typography,
+  WithStyles,
+  withStyles,
 } from "@material-ui/core";
 import { Search as SearchIcon } from "@material-ui/icons";
 import { onSearchChange } from "../../../actions/search";
 import { ReactReduxContext } from "react-redux";
+import { flowRight } from "lodash";
+
+const styles = () =>
+  createStyles({
+    searchInput: {
+      backgroundColor: "white",
+      borderRadius: "5px",
+    },
+    searchInputWrapper: {
+      borderRadius: "5px",
+    },
+  });
+
+export type Props = WithStyles<typeof styles> & {};
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -28,41 +46,28 @@ const Search = styled("div")(({ theme }) => ({
   },
 }));
 
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    backgroundColor: "white",
-    color: "black",
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `5px`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      width: "12ch",
-      "&:focus": {
-        width: "20ch",
-      },
-    },
-  },
-}));
-
-export const Navbar = () => {
+const NavbarComponent = (props: Props) => {
   const { store } = useContext(ReactReduxContext);
+  const { classes } = props;
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <Search>
-            <StyledInputBase
-              onChange={(e) => onSearchChange(e.target.value, store)}
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
+          <Search className={classes.searchInputWrapper}>
+            <TextField
+              label="search words"
+              onChange={(e) => {
+                onSearchChange(e.target.value, store);
+              }}
+              variant="outlined"
+              className={classes.searchInput}
+            ></TextField>
           </Search>
         </Toolbar>
       </AppBar>
     </Box>
   );
 };
+
+export const Navbar = flowRight(withStyles(styles))(NavbarComponent);

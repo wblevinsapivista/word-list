@@ -1,3 +1,3 @@
-export * from "./UI/StockList";
-export * from "./UI/StockDetail";
+export * from "./UI/WordList";
+export * from "./UI/FavoriteWordList";
 export * from "./UI/Navbar";

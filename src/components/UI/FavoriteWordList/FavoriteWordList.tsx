@@ -3,34 +3,33 @@ import { createStyles, withStyles } from "@material-ui/styles";
 import { flowRight } from "lodash";
 import { Grid, IconButton } from "@material-ui/core";
 import { Remove } from "@material-ui/icons";
-import { withFavoriteStocks } from "../../data/withFavoriteStocks";
-import { removeFromFavorites } from "../../../actions/stock";
+import { withFavoriteWords } from "../../data/withFavoriteWords";
+import { removeFromFavorites } from "../../../actions/word";
 import { ReactReduxContext } from "react-redux";
 
 const styles = () =>
   createStyles({
-    favoriteStockItem: {
+    favoriteWordItem: {
       display: "inline-block",
       float: "left",
     },
   });
 
-const FavoriteStockListComponent = (props: any) => {
+const FavoriteWordListComponent = (props: any) => {
   const { store } = useContext(ReactReduxContext);
-  const { favoriteStocks, classes } = props;
+  const { favoriteWords, classes } = props;
 
   return (
     <Grid container>
-      {Object.keys(favoriteStocks).map((key) => {
-        const favoriteStock = favoriteStocks[key];
+      {Object.keys(favoriteWords).map((key) => {
+        const favoriteWord = favoriteWords[key];
         return (
           <>
             <Grid xs={9}>
-              <p className={classes.favoriteStockItem}>
+              <p className={classes.favoriteWordItem}>
                 <span className={classes.tickerSymbol}>
-                  {favoriteStock.symbol}
+                  {favoriteWord.word}
                 </span>
-                {favoriteStock.name}
               </p>
             </Grid>
             <Grid xs={3}>
@@ -45,7 +44,7 @@ const FavoriteStockListComponent = (props: any) => {
   );
 };
 
-export const FavoriteStockList = flowRight(
+export const FavoriteWordList = flowRight(
   withStyles(styles),
-  withFavoriteStocks
-)(FavoriteStockListComponent);
+  withFavoriteWords
+)(FavoriteWordListComponent);

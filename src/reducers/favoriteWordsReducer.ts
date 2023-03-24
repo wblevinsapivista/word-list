@@ -1,34 +1,34 @@
 import { Action as ReduxAction } from "redux";
 import {
-  Stock,
-  ADD_FAVORITE_STOCK,
-  REMOVE_FAVORITE_STOCK,
-} from "../actions/stock";
+  ADD_FAVORITE_WORD,
+  REMOVE_FAVORITE_WORD,
+  WordMatch,
+} from "../actions/word";
 
 interface Action extends ReduxAction {
   payload?: any;
 }
 
-export interface StockState {
-  [key: string]: Stock;
+export interface WordState {
+  [key: string]: WordMatch;
 }
 
-const initialState: StockState = {};
+const initialState: WordState = {};
 
-export default function favoriteStockReducer(
+export default function favoriteWordsReducer(
   state = initialState,
   action: Action
 ) {
   switch (action.type) {
-    case ADD_FAVORITE_STOCK:
+    case ADD_FAVORITE_WORD:
       return {
         ...state,
-        [action.payload.symbol]: {
+        [action.payload.word]: {
           ...action.payload,
           isFavorite: true,
         },
       };
-    case REMOVE_FAVORITE_STOCK:
+    case REMOVE_FAVORITE_WORD:
       const { [action.payload]: value, ...updatedStore } = state;
       return updatedStore;
     default:

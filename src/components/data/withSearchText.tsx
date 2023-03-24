@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { flowRight } from "lodash";
-import { Stock } from "../../actions/stock";
 
 export interface WithSearchTextProps {
   searchText: string;

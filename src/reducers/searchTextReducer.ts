@@ -5,18 +5,7 @@ interface Action extends ReduxAction {
   payload?: any;
 }
 
-export interface SearchState {
-  searchText: string;
-}
-
-const initialState: SearchState = {
-  searchText: "",
-};
-
-export default function favoriteStockReducer(
-  state = initialState,
-  action: Action
-) {
+export default function searchTextReducer(state = "", action: Action) {
   switch (action.type) {
     case SEARCH_TEXT_CHANGED:
       return action.payload;

@@ -3,13 +3,13 @@ import ReactDOM from "react-dom/client";
 import { configureStore } from "@reduxjs/toolkit";
 import "./index.css";
 import App from "./App";
-import favoriteStockReducer from "./reducers/favoriteStocksReducer";
+import favoriteWordsReducer from "./reducers/favoriteWordsReducer";
 import searchTextReducer from "./reducers/searchTextReducer";
 import { Provider } from "react-redux";
 
 const store = configureStore({
   reducer: {
-    favoriteStocks: favoriteStockReducer,
+    favoriteWords: favoriteWordsReducer,
     searchText: searchTextReducer,
   },
 });
