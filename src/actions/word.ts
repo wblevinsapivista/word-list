@@ -1,5 +1,3 @@
-import { useContext } from "react";
-import { ReactReduxContext } from "react-redux";
 import { WordController } from "../api/WordController";
 
 export interface WordMatch {

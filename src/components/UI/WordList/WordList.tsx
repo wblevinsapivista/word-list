@@ -1,18 +1,14 @@
 import React, { useContext } from "react";
 import { withStyles, WithStyles, createStyles } from "@material-ui/core/styles";
 import { Button, Grid, IconButton } from "@material-ui/core";
-import { ReactReduxContext } from "react-redux";
+import { connect, ReactReduxContext, useStore } from "react-redux";
 import { flowRight } from "lodash";
 import { Add, Check } from "@material-ui/icons";
 import {
   withFavoriteWords,
   WithFavoriteWordsProps,
 } from "../../data/withFavoriteWords";
-import {
-  WordMatch,
-  addToFavorites,
-  removeFromFavorites,
-} from "../../../actions/word";
+import { WordMatch, addToFavorites } from "../../../actions/word";
 
 const styles = () =>
   createStyles({
@@ -32,7 +28,8 @@ export type WordListProps = WithStyles<typeof styles> &
   };
 
 const WordListComponent = (props: WordListProps) => {
-  const { store } = useContext(ReactReduxContext);
+  const store = useStore();
+
   const { classes, words, favoriteWords } = props;
 
   const isFavorited = (wordMatch: WordMatch) => {
@@ -49,9 +46,15 @@ const WordListComponent = (props: WordListProps) => {
             </Grid>
             <Grid xs={3}>
               {isFavorited(wordMatch) ? (
-                <Check className={classes.checkIcon}></Check>
+                <Check
+                  aria-label={"favorite-check"}
+                  className={classes.checkIcon}
+                ></Check>
               ) : (
-                <IconButton onClick={() => addToFavorites(wordMatch, store)}>
+                <IconButton
+                  aria-label={"favorite-btn"}
+                  onClick={() => addToFavorites(wordMatch, store)}
+                >
                   <Add></Add>
                 </IconButton>
               )}

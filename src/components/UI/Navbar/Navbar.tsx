@@ -15,7 +15,7 @@ import {
 } from "@material-ui/core";
 import { Search as SearchIcon } from "@material-ui/icons";
 import { onSearchChange } from "../../../actions/search";
-import { ReactReduxContext } from "react-redux";
+import { ReactReduxContext, useStore } from "react-redux";
 import { flowRight } from "lodash";
 
 const styles = () =>
@@ -47,7 +47,7 @@ const Search = styled("div")(({ theme }) => ({
 }));
 
 const NavbarComponent = (props: Props) => {
-  const { store } = useContext(ReactReduxContext);
+  const store = useStore();
   const { classes } = props;
 
   return (
@@ -56,6 +56,7 @@ const NavbarComponent = (props: Props) => {
         <Toolbar>
           <Search className={classes.searchInputWrapper}>
             <TextField
+              aria-label="search words field"
               label="search words"
               onChange={(e) => {
                 onSearchChange(e.target.value, store);

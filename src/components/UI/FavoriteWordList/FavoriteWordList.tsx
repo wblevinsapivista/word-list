@@ -5,7 +5,7 @@ import { Grid, IconButton } from "@material-ui/core";
 import { Remove } from "@material-ui/icons";
 import { withFavoriteWords } from "../../data/withFavoriteWords";
 import { removeFromFavorites } from "../../../actions/word";
-import { ReactReduxContext } from "react-redux";
+import { ReactReduxContext, useStore } from "react-redux";
 
 const styles = () =>
   createStyles({
@@ -16,7 +16,7 @@ const styles = () =>
   });
 
 const FavoriteWordListComponent = (props: any) => {
-  const { store } = useContext(ReactReduxContext);
+  const store = useStore();
   const { favoriteWords, classes } = props;
 
   return (
@@ -26,15 +26,18 @@ const FavoriteWordListComponent = (props: any) => {
         const favoriteWord = favoriteWords[key];
         return (
           <>
-            <Grid xs={9}>
+            <Grid key={favoriteWord.word} xs={9}>
               <p className={classes.favoriteWordItem}>
                 <span className={classes.tickerSymbol}>
                   {favoriteWord.word}
                 </span>
               </p>
             </Grid>
-            <Grid xs={3}>
-              <IconButton onClick={() => removeFromFavorites(key, store)}>
+            <Grid xs={3} key={favoriteWord.word}>
+              <IconButton
+                aria-label={`remove-btn`}
+                onClick={() => removeFromFavorites(key, store)}
+              >
                 <Remove></Remove>
               </IconButton>
             </Grid>
