@@ -21,6 +21,7 @@ const FavoriteWordListComponent = (props: any) => {
 
   return (
     <Grid container>
+      {Object.keys(favoriteWords).length ? <h1>Favorite Words</h1> : <></>}
       {Object.keys(favoriteWords).map((key) => {
         const favoriteWord = favoriteWords[key];
         return (
