@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/word-list/static/css/main.073c9b0a.css",
+    "main.js": "/word-list/static/js/main.53af2c30.js",
+    "index.html": "/word-list/index.html",
+    "main.073c9b0a.css.map": "/word-list/static/css/main.073c9b0a.css.map",
+    "main.53af2c30.js.map": "/word-list/static/js/main.53af2c30.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.073c9b0a.css",
+    "static/js/main.53af2c30.js"
+  ]
+}
